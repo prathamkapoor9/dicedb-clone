@@ -79,8 +79,8 @@ func RunAsyncTCPServer() error {
 		// see if any FD is ready for an IO
 		// block for at most cronFrequency so the loop wakes up to run
 		// the cron even when there is no I/O activity
-		timeout := syscall.NsecToTimespec(cronFrequency.Nanoseconds())
-		nevents, e := syscall.Kevent(kqueueFD, nil, events[:], &timeout)
+		// timeout := syscall.NsecToTimespec(cronFrequency.Nanoseconds())
+		nevents, e := syscall.Kevent(kqueueFD, nil, events[:], nil)
 		if e != nil {
 			continue
 		}
